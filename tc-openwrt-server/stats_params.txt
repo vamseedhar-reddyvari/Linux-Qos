@@ -1,0 +1,19 @@
+Sent:
+-----
+
+Test: Using iperf send known number of bytes and see if it increments appropriately. But the ssh pollutes the count variable. So lets create a new class which classifies udp traffic perform the experiment.
+
+Current sent count: 0 0
+
+rate:
+-----
+
+dropped
+
+overlimits
+
+requeues
+
+backlog
+
+

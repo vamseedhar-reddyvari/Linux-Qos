@@ -64,7 +64,7 @@ int main(int argc, char *argv[])
 
     printf("send()ing back a message...\n");
     char msg[1000] = "";// = "The Messave from tc server.";
-    command_output("ls",msg);
+    command_output("tc qdisc list",msg);
 
     int len;
     ssize_t bytes_sent;

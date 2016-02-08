@@ -1,0 +1,34 @@
+Source-Makefile: package/helloworld/Makefile
+Package: helloworld
+Version: 1
+Depends: +libc +USE_EGLIBC:librt +USE_EGLIBC:libpthread 
+Menu-Depends: 
+Provides: 
+Section: utils
+Category: Utilities
+Title: Helloworld -- prints a snarky message
+Maintainer: 
+Source: 
+Type: ipkg
+Description: Helloworld -- prints a snarky message
+
+@@
+
+
+Source-Makefile: package/tc-stat-server/Makefile
+Package: tc-stat-server
+Version: 1
+Depends: +libc +USE_EGLIBC:librt +USE_EGLIBC:libpthread 
+Menu-Depends: 
+Provides: 
+Section: utils
+Category: Utilities
+Title: tc-stat-server -- prints a snarky message
+Maintainer: 
+Source: 
+Type: ipkg
+Description: tc-stat-server -- prints a snarky message
+
+@@
+
+

@@ -1,0 +1,2 @@
+package-$(CONFIG_PACKAGE_helloworld) += helloworld
+package-$(CONFIG_PACKAGE_tc-stat-server) += tc-stat-server

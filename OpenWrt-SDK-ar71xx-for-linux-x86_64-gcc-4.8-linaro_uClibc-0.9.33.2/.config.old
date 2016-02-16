@@ -494,3 +494,4 @@ CONFIG_PACKAGE_uboot-envtools=y
 # Utilities
 #
 CONFIG_PACKAGE_helloworld=m
+CONFIG_PACKAGE_tc-stat-server=m

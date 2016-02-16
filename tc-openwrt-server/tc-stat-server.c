@@ -64,12 +64,15 @@ int main(int argc, char *argv[])
 
     printf("send()ing back a message...\n");
     char msg[1000] = "";// = "The Messave from tc server.";
-    command_output("tc qdisc list",msg);
+    char msg2[1000] = "";// = "The Messave from tc server.";
+    command_output("tc -s class show dev wlan0|grep -w 'Sent'",msg);
+    command_output("iptables -t mangle -nvx -L | grep 'set 0x3'",msg2);
 
-    int len;
+    int len1,len2;
     ssize_t bytes_sent;
-    len = strlen(msg);
-    bytes_sent = send(new_fd, msg, len, 0);
+    strcat(msg,msg2);
+    len1 = strlen(msg);
+    bytes_sent = send(new_fd, msg, len1, 0);
     //sleep(10);
 
     // Need to send a termination message

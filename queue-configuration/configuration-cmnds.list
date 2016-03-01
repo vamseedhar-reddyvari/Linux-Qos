@@ -1,0 +1,48 @@
+# List qdisc 
+sudo tc qdisc list
+
+# HTB with 3 classes
+ tc qdisc replace dev wlan0 root handle 1: htb default 3;
+ tc class add dev wlan0 parent 1: classid 1:2 htb rate 200kbps ceil 200kbps;
+ tc class add dev wlan0 parent 1: classid 1:3 htb rate 300kbps ceil 300kbps;
+ tc class add dev wlan0 parent 1: classid 1:1 htb rate 100kbps ceil 100kbps;
+
+# Filter to forward tcp traffic to class 1
+sudo tc filter add dev eth0 protocol ip parent 1: prio 1 u32 match ip dport 5001 0xffff flowid 1:2
+ 
+
+# Show Filters
+tc filter show dev wlan0
+# Delete Filters
+tc filter del dev wlan0 prio 1
+
+#stats
+sudo tc -s -d class show dev eth0
+# Reset
+sudo tc qdisc replace dev eth0 root pfifo
+
+#iperf
+-c ---> client
+-s ---> server
+-u ---> Sends UDP packets else default TCP
+-w ---> Pkt Size. Should be given for TCP and should be same for client and server
+-b ---> Target rate. Should be given for UDP and should be more than what we expect
+
+#iptables marking and deleting
+iptables -t mangle -A PREROUTING -p protocol -d destnAdd -s SrcAddr  -j MARK --set-mark 0x1
+iptables -t mangle -A PREROUTING -p tcp -m tcp --dport 5001 -j MARK --set-mark 0x3
+
+iptables -L -t mangle --line-numbers
+iptables -t mangle -D PREROUTING x
+
+
+
+#iptables stats
+iptables -t mangle -nvx -L | grep 'set 0x3'
+
+
+
+#commands executed
+
+iptables -t mangle -A PREROUTING -s 192.168.1.123  -j MARK --set-mark 0x3
+
